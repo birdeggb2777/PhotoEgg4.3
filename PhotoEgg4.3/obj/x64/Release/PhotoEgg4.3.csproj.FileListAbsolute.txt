@@ -1,0 +1,14 @@
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PhotoEgg4.3\bin\x64\Release\PhotoEgg4.3.exe.config
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PhotoEgg4.3\bin\x64\Release\PhotoEgg4.3.exe
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PhotoEgg4.3\bin\x64\Release\PhotoEgg4.3.pdb
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PhotoEgg4.3\obj\x64\Release\PhotoEgg4._3.DrawForm.resources
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PhotoEgg4.3\obj\x64\Release\PhotoEgg4._3.Form1.resources
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PhotoEgg4.3\obj\x64\Release\PhotoEgg4._3.Properties.Resources.resources
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PhotoEgg4.3\obj\x64\Release\PhotoEgg4._3.TopForm.resources
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PhotoEgg4.3\obj\x64\Release\PhotoEgg4.3.csproj.GenerateResource.cache
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PhotoEgg4.3\obj\x64\Release\PhotoEgg4.3.exe
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PhotoEgg4.3\obj\x64\Release\PhotoEgg4.3.pdb
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PhotoEgg4.3\bin\x64\Release\PenDrawing.dll
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PhotoEgg4.3\bin\x64\Release\PenDrawing.pdb
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PhotoEgg4.3\obj\x64\Release\PhotoEgg4.3.csprojAssemblyReference.cache
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PhotoEgg4.3\obj\x64\Release\PhotoEgg4.3.csproj.CopyComplete
