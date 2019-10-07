@@ -39,6 +39,8 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.TransparentText = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.PenSizeText1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
@@ -46,6 +48,7 @@
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.SelectFullColor_Picture = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -67,7 +70,7 @@
             this.檔案ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1044, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1044, 29);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -76,21 +79,21 @@
             this.檔案ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.載入圖片ToolStripMenuItem});
             this.檔案ToolStripMenuItem.Name = "檔案ToolStripMenuItem";
-            this.檔案ToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+            this.檔案ToolStripMenuItem.Size = new System.Drawing.Size(55, 25);
             this.檔案ToolStripMenuItem.Text = "檔案";
             // 
             // 載入圖片ToolStripMenuItem
             // 
             this.載入圖片ToolStripMenuItem.Name = "載入圖片ToolStripMenuItem";
-            this.載入圖片ToolStripMenuItem.Size = new System.Drawing.Size(159, 30);
+            this.載入圖片ToolStripMenuItem.Size = new System.Drawing.Size(233, 30);
             this.載入圖片ToolStripMenuItem.Text = "載入圖片";
             this.載入圖片ToolStripMenuItem.Click += new System.EventHandler(this.載入圖片ToolStripMenuItem_Click);
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(0, 28);
+            this.splitter1.Location = new System.Drawing.Point(0, 29);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(477, 787);
+            this.splitter1.Size = new System.Drawing.Size(477, 786);
             this.splitter1.TabIndex = 1;
             this.splitter1.TabStop = false;
             // 
@@ -130,6 +133,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.TransparentText);
+            this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Controls.Add(this.PenSizeText1);
             this.tabPage3.Controls.Add(this.label1);
             this.tabPage3.ImageIndex = 4;
@@ -139,6 +144,27 @@
             this.tabPage3.Size = new System.Drawing.Size(281, 279);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // TransparentText
+            // 
+            this.TransparentText.Font = new System.Drawing.Font("新細明體", 17.856F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.TransparentText.Location = new System.Drawing.Point(150, 72);
+            this.TransparentText.MaxLength = 3;
+            this.TransparentText.Name = "TransparentText";
+            this.TransparentText.Size = new System.Drawing.Size(80, 45);
+            this.TransparentText.TabIndex = 3;
+            this.TransparentText.Text = "100";
+            this.TransparentText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TransparentText_KeyPress);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("新細明體", 17.856F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label2.Location = new System.Drawing.Point(6, 79);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(111, 32);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "透明度";
             // 
             // PenSizeText1
             // 
@@ -221,6 +247,11 @@
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Picture_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Picture_MouseUp);
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // DrawForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
@@ -270,5 +301,8 @@
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox SelectFullColor_Picture;
+        private System.Windows.Forms.TextBox TransparentText;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Timer timer1;
     }
 }

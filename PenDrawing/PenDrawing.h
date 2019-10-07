@@ -15,34 +15,178 @@ using namespace std;
 using namespace System;
 
 namespace PenDrawing {
+	/*public ref class Brush {
+	public:
+		unsigned char R = 0;
+		unsigned char G = 0;
+		unsigned char B = 0;
+		int width = 10;
+		int height = 10;
+		unsigned char** fp;
+		Brush(unsigned char r, unsigned char g, unsigned char b, int size) {
+			R = r;
+			G = g;
+			B = b;
+			width = size;
+			height = size;
+
+
+			fp = new unsigned char* [height];
+			for (int j = 0; j < height; j++)
+				fp[j] = new unsigned char[width * 4];
+
+			for (int h = 0;h < height;h++) {
+				for (int w = 0; w < width; w += 4) {
+					if (sqrt(h * h + w * w) <= size) {
+						fp[h][w] = b;
+						fp[h][w + 1] = g;
+						fp[h][w + 2] = r;
+						fp[h][w + 3] = 255;
+					}
+					else
+					{
+						fp[h][w] = 0;
+						fp[h][w + 1] = 0;
+						fp[h][w + 2] = 0;
+						fp[h][w + 3] = 0;
+					}
+				}
+			}
+		}
+		void createBrush() {
+
+
+		}
+	};*/
 	public ref class DrawClass
 	{
 		// TODO: 請在此新增此類別的方法。
+
+
+
 	public:
 		unsigned Color_R = 0;
 		unsigned Color_G = 0;
 		unsigned Color_B = 0;
-		void Black(unsigned char* ptr, int width, int height, int channel,int pointX,int pointY,int size)
+
+		//unsigned char** BrushFp;
+		//Brush MyBrush;
+		void Black(unsigned char* ptr, int width, int height, int channel, int pointX, int pointY, int size, int transparent)
 		{
 			unsigned char** fp = new unsigned char* [height];
 			int Stride = width * channel, x = 0, y = 0;
+			double trans = (double)transparent / 100;
+			if (trans > 1)trans = 1;
 			for (int j = 0; j < height; j++)
 				fp[j] = ptr + (Stride * j);
-			for (y = pointY; y < pointY+ size; y++)
+			for (y = pointY; y < pointY + size; y++)
 			{
-				for (x = pointX*4; x < (pointX+ size)*4; x += channel)
+				for (x = pointX * 4; x < (pointX + size) * 4; x += channel)
 				{
-					if (y  < 0 || y  >= height || x  < 0 || x  >= Stride)
+					if (y < 0 || y >= height || x < 0 || x >= Stride)
 					{
 						continue;
 					}
-					fp[y][x] = Color_B;
-					fp[y][x + 1] = Color_G;
-					fp[y][x + 2] = Color_R;
+					fp[y][x] = (unsigned char)(fp[y][x] * (1 - trans) + Color_B * trans);
+					fp[y][x + 1] = (unsigned char)(fp[y][x + 1] * (1 - trans) + Color_G * trans);
+					fp[y][x + 2] = (unsigned char)(fp[y][x + 2] * (1 - trans) + Color_R * trans);
 				}
 			}
 			delete[] fp;
 		}
+
+		void BlackBrush(unsigned char* ptr, int width, int height, int channel, int pointX, int pointY, int transparent)
+		{
+			if (!Brush_fp)return;
+			unsigned char** fp = new unsigned char* [height];
+			int Stride = width * channel, x = 0, y = 0;
+			int x2 = 0; int y2 = 0;
+			//double trans = (double)transparent / 100;
+			//if (trans > 1)trans = 1;
+			for (int j = 0; j < height; j++)
+				fp[j] = ptr + (Stride * j);
+			int pasteXPoint = pointX * channel;
+			for (y = 0, y2 = 0; y < height && y2 < Brush_height; y++, y2++)
+			{
+				for (x = 0, x2 = 0; x < Stride && x2 < Brush_width * 4; x += channel, x2 += channel)
+				{
+					if (x + pasteXPoint >= Stride || x + pasteXPoint < 0 || y + pointY >= height || y + pointY < 0)continue;
+					if (x2 >= Brush_width * 4 || x2 < 0 || y2 >= Brush_height || y2 < 0)continue;
+					if (Brush_fp[y2][x2 + 3] == 0)continue;
+					fp[y + pointY][x + pasteXPoint] = Brush_fp[y2][x2];
+					fp[y + pointY][x + pasteXPoint + 1] = Brush_fp[y2][x2+1];
+					fp[y + pointY][x + pasteXPoint + 2] = Brush_fp[y2][x2+2];
+				}
+			}
+
+
+			/*	for (y = pointY; y < pointY + size; y++)
+				{
+					for (x = pointX * 4; x < (pointX + size) * 4; x += channel)
+					{
+						if (y < 0 || y >= height || x < 0 || x >= Stride)
+						{
+							continue;
+						}
+						fp[y][x] = (unsigned char)(fp[y][x] * (1 - trans) + Color_B * trans);
+						fp[y][x + 1] = (unsigned char)(fp[y][x + 1] * (1 - trans) + Color_G * trans);
+						fp[y][x + 2] = (unsigned char)(fp[y][x + 2] * (1 - trans) + Color_R * trans);
+					}
+				}
+				delete[] fp;*/
+		}
+
+
+
+
+
+
+
+
+		int Brush_width = 0;
+		int Brush_height = 0;
+		unsigned char** Brush_fp;
+		void CreateBrush(int size) {
+			for (int i = 0;i < Brush_height;i++) {
+				delete Brush_fp[i];
+			}
+			Brush_width = size;
+			Brush_height = size;
+
+			Brush_fp = new unsigned char* [Brush_height];
+			for (int j = 0; j < Brush_height; j++)
+				Brush_fp[j] = new unsigned char[Brush_width * 4];
+
+			for (int h = 0;h < Brush_height;h++) {
+				for (int w = 0; w < Brush_width*4; w += 4) {
+					if (pow(w/4- (Brush_width /2),2)+ pow(h - (Brush_height / 2), 2) <= (size/2)*(size/2)) {
+						Brush_fp[h][w] = Color_B;
+						Brush_fp[h][w + 1] = Color_G;
+						Brush_fp[h][w + 2] = Color_R;
+						Brush_fp[h][w + 3] = 255;
+					}
+					else
+					{
+						Brush_fp[h][w] = 0;
+						Brush_fp[h][w + 1] = 0;
+						Brush_fp[h][w + 2] = 0;
+						Brush_fp[h][w + 3] = 0;
+					}
+				}
+			}
+		}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

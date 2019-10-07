@@ -42,14 +42,11 @@ namespace PhotoEgg4._3
             openFileDialog1.Filter = "圖片檔 (*.png;*.jpg;*.bmp;*.gif;*.tif)|*.png;*.jpg;*.bmp;*.gif;*.tif";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                StretchRange = 1;
                 Main_Bitmap = new Bitmap(openFileDialog1.FileName);
                 // Main_Bitmap.SetResolution(1,1);
                 NowPicture_X = (this.Width - Main_Bitmap.Width) / 2; NowPicture_Y = (this.Height - Main_Bitmap.Height) / 2;
-                this.backGraphics.FillRectangle(Brushes.White, 0, 0, this.DisplayRectangle.Width, this.DisplayRectangle.Height);
-
-                this.backGraphics.DrawImage(Main_Bitmap, new PointF(NowPicture_X, NowPicture_Y));
-
-                this.CreateGraphics().DrawImageUnscaled(this.backBmp, 0, 0);
+                reflesh();
 
             }
         }
@@ -83,9 +80,7 @@ namespace PhotoEgg4._3
             // NowPicture_Y = NowPicture_Y + (int)(Main_Bitmap.Height - (Main_Bitmap.Height * StretchRange)) / 2;
             try
             {
-                this.backGraphics.FillRectangle(Brushes.White, 0, 0, this.DisplayRectangle.Width, this.DisplayRectangle.Height);
-                this.backGraphics.DrawImage(Main_Bitmap, new Rectangle(NowPicture_X, NowPicture_Y, (int)(Main_Bitmap.Width * StretchRange), (int)(Main_Bitmap.Height * StretchRange)));
-                this.CreateGraphics().DrawImageUnscaled(this.backBmp, 0, 0);
+                reflesh();
             }
             catch { }
 
@@ -95,14 +90,12 @@ namespace PhotoEgg4._3
             // If there is an image and it has a location, 
             // paint it when the Form is repainted.
             base.OnPaint(e);
-           
+
             try
             {
                 // Create a local version of the graphics object for the PictureBox.
                 //DrawBrush(Mouse_X1 - NowPicture_X, Mouse_Y1 - NowPicture_Y, Mouse_X2 - NowPicture_X, Mouse_Y2 - NowPicture_Y);
-                this.backGraphics.FillRectangle(Brushes.White, 0, 0, this.DisplayRectangle.Width, this.DisplayRectangle.Height);
-                this.backGraphics.DrawImage(Main_Bitmap, new Rectangle(NowPicture_X, NowPicture_Y, (int)(Main_Bitmap.Width * StretchRange), (int)(Main_Bitmap.Height * StretchRange)));
-                this.CreateGraphics().DrawImageUnscaled(this.backBmp, 0, 0);
+                reflesh();
             }
             catch { }
         }
@@ -112,9 +105,7 @@ namespace PhotoEgg4._3
             {
                 // Create a local version of the graphics object for the PictureBox.
                 //DrawBrush(Mouse_X1 - NowPicture_X, Mouse_Y1 - NowPicture_Y, Mouse_X2 - NowPicture_X, Mouse_Y2 - NowPicture_Y);
-                this.backGraphics.FillRectangle(Brushes.White, 0, 0, this.DisplayRectangle.Width, this.DisplayRectangle.Height);
-                this.backGraphics.DrawImage(Main_Bitmap, new Rectangle(NowPicture_X, NowPicture_Y, (int)(Main_Bitmap.Width * StretchRange), (int)(Main_Bitmap.Height * StretchRange)));
-                this.CreateGraphics().DrawImageUnscaled(this.backBmp, 0, 0);
+                reflesh();
             }
             catch { }
         }
@@ -129,8 +120,8 @@ namespace PhotoEgg4._3
                     this.backGraphics.FillRectangle(Brushes.White, 0, 0, this.DisplayRectangle.Width, this.DisplayRectangle.Height);
                     NowPicture_X += Mouse_X2 - Mouse_X1;
                     NowPicture_Y += Mouse_Y2 - Mouse_Y1;
-                    this.backGraphics.DrawImage(Main_Bitmap, new Rectangle(NowPicture_X, NowPicture_Y, (int)(Main_Bitmap.Width * StretchRange), (int)(Main_Bitmap.Height * StretchRange)));
-                    this.CreateGraphics().DrawImageUnscaled(this.backBmp, 0, 0);
+                    // this.backGraphics.DrawImage(Main_Bitmap, new Rectangle(NowPicture_X, NowPicture_Y, (int)(Main_Bitmap.Width * StretchRange), (int)(Main_Bitmap.Height * StretchRange)));
+                    //this.CreateGraphics().DrawImageUnscaled(this.backBmp, 0, 0);
                 }
                 if (MouseDownClick == true && tabControl1.SelectedTab == tabControl1.TabPages[2])
                 {
@@ -138,9 +129,10 @@ namespace PhotoEgg4._3
 
                     DrawBrush(Mouse_X1 - NowPicture_X, Mouse_Y1 - NowPicture_Y, Mouse_X2 - NowPicture_X, Mouse_Y2 - NowPicture_Y);
                     this.backGraphics.FillRectangle(Brushes.White, 0, 0, this.DisplayRectangle.Width, this.DisplayRectangle.Height);
-                    this.backGraphics.DrawImage(Main_Bitmap, new Rectangle(NowPicture_X, NowPicture_Y, (int)(Main_Bitmap.Width * StretchRange), (int)(Main_Bitmap.Height * StretchRange)));
-                    this.CreateGraphics().DrawImageUnscaled(this.backBmp, 0, 0);
+                    // this.backGraphics.DrawImage(Main_Bitmap, new Rectangle(NowPicture_X, NowPicture_Y, (int)(Main_Bitmap.Width * StretchRange), (int)(Main_Bitmap.Height * StretchRange)));
+                    // this.CreateGraphics().DrawImageUnscaled(this.backBmp, 0, 0);
                 }
+                reflesh();
                 Mouse_X1 = e.X;
                 Mouse_Y1 = e.Y;
             }
@@ -182,10 +174,19 @@ namespace PhotoEgg4._3
         }
         private void DrawBrush(int OpointX, int OpointY, int pointX, int pointY)
         {
+
             int size = 20;
+            int transparent = 100;
             try
             {
                 size = Int32.Parse(PenSizeText1.Text);
+                PixelDraw_Operate.CreateBrush(size);
+            }
+            catch { }
+            try
+            {
+                transparent = Int32.Parse(TransparentText.Text);
+                if (transparent > 100) transparent = 100;
             }
             catch { }
             int Line = (int)Math.Sqrt((double)(OpointX * OpointX + OpointY * OpointY));
@@ -194,6 +195,8 @@ namespace PhotoEgg4._3
             BitmapData MyBmpData = MyNewBmp.LockBits(MyRec, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
             unsafe
             {
+               // PixelDraw_Operate.BlackBrush((byte*)(MyBmpData.Scan0), MyNewBmp.Width, MyNewBmp.Height, 4, (int)(50 / StretchRange), (int)(50 / StretchRange), transparent);
+
                 int Reduce_X = OpointX > pointX ? pointX : OpointX;
                 int Reduce_Y = OpointY > pointY ? pointY : OpointY;
                 int Up_X = OpointX < pointX ? pointX : OpointX;
@@ -204,7 +207,9 @@ namespace PhotoEgg4._3
                     {
                         int X = (int)(Reduce_X + (double)Math.Abs(OpointX - pointX) / (double)Line * i);
                         int Y = (int)(Up_Y + -(double)Math.Abs(OpointY - pointY) / (double)Line * i);
-                        PixelDraw_Operate.Black((byte*)(MyBmpData.Scan0), MyNewBmp.Width, MyNewBmp.Height, 4, (int)(X / StretchRange), (int)(Y / StretchRange), size);
+                        // PixelDraw_Operate.Black((byte*)(MyBmpData.Scan0), MyNewBmp.Width, MyNewBmp.Height, 4, (int)(X / StretchRange), (int)(Y / StretchRange), size, transparent);
+                        PixelDraw_Operate.BlackBrush((byte*)(MyBmpData.Scan0), MyNewBmp.Width, MyNewBmp.Height, 4, (int)(X / StretchRange), (int)(Y / StretchRange), transparent);
+
                     }
 
                 }
@@ -214,7 +219,9 @@ namespace PhotoEgg4._3
                     {
                         int X = (int)(Reduce_X + (double)Math.Abs(OpointX - pointX) / (double)Line * i);
                         int Y = (int)(Reduce_Y + (double)Math.Abs(OpointY - pointY) / (double)Line * i);
-                        PixelDraw_Operate.Black((byte*)(MyBmpData.Scan0), MyNewBmp.Width, MyNewBmp.Height, 4, (int)(X / StretchRange), (int)(Y / StretchRange), size);
+                        // PixelDraw_Operate.Black((byte*)(MyBmpData.Scan0), MyNewBmp.Width, MyNewBmp.Height, 4, (int)(X / StretchRange), (int)(Y / StretchRange), size, transparent);
+                        PixelDraw_Operate.BlackBrush((byte*)(MyBmpData.Scan0), MyNewBmp.Width, MyNewBmp.Height, 4, (int)(X / StretchRange), (int)(Y / StretchRange), transparent);
+
                     }
                 }
             }
@@ -227,11 +234,22 @@ namespace PhotoEgg4._3
                 e.Handled = true;
             }
         }
+        private void TransparentText_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((int)e.KeyChar < 48 | (int)e.KeyChar > 57) & (int)e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
+        }
         private void Picture_MouseDown(object sender, MouseEventArgs e)
         {
             SelectColo_MouseDownClick = true;
-            Graphics selectColor_G = pictureBox1.CreateGraphics();
-            selectColor_G.DrawImage(SelectColor_BMP, new Rectangle(0, 0, 255, 255));
+            BufferedGraphicsContext currentContext = BufferedGraphicsManager.Current;
+            BufferedGraphics myBuffer = currentContext.Allocate(pictureBox1.CreateGraphics(), pictureBox1.DisplayRectangle);
+
+            //Graphics selectColor_G = pictureBox1.CreateGraphics(); ;
+            myBuffer.Graphics.Clear(Color.White);
+            myBuffer.Graphics.DrawImage(SelectColor_BMP, new Rectangle(0, 0, 255, 255));
             try
             {
                 // Color c = (SelectColor_BMP).GetPixel(e.X, e.Y);
@@ -239,9 +257,10 @@ namespace PhotoEgg4._3
                 selectColorX = e.X;
                 selectColorY = e.Y;
                 Pen myPen = new Pen(Color.Black);
-                selectColor_G.DrawEllipse(myPen, selectColorX - 15, selectColorY - 15, 30, 30);
+                myBuffer.Graphics.DrawEllipse(myPen, selectColorX - 15, selectColorY - 15, 30, 30);
                 myPen = new Pen(Color.White);
-                selectColor_G.DrawEllipse(myPen, selectColorX - 16, selectColorY - 16, 32, 32);
+                myBuffer.Graphics.DrawEllipse(myPen, selectColorX - 16, selectColorY - 16, 32, 32);
+                myBuffer.Render(pictureBox1.CreateGraphics());
             }
             catch
             {
@@ -250,8 +269,12 @@ namespace PhotoEgg4._3
         }
         private void Picture_MouseMove(object sender, MouseEventArgs e)
         {
-            Graphics selectColor_G = pictureBox1.CreateGraphics(); ;
-            selectColor_G.DrawImage(SelectColor_BMP, new Rectangle(0, 0, 255, 255));
+            BufferedGraphicsContext currentContext = BufferedGraphicsManager.Current;
+            BufferedGraphics myBuffer = currentContext.Allocate(pictureBox1.CreateGraphics(), pictureBox1.DisplayRectangle);
+
+            //Graphics selectColor_G = pictureBox1.CreateGraphics(); ;
+            myBuffer.Graphics.Clear(Color.White);
+            myBuffer.Graphics.DrawImage(SelectColor_BMP, new Rectangle(0, 0, 255, 255));
             try
             {
                 if (SelectColo_MouseDownClick == true)
@@ -261,9 +284,10 @@ namespace PhotoEgg4._3
 
                 }
                 Pen myPen = new Pen(Color.Black);
-                selectColor_G.DrawEllipse(myPen, selectColorX - 15, selectColorY - 15, 30, 30);
+                myBuffer.Graphics.DrawEllipse(myPen, selectColorX - 15, selectColorY - 15, 30, 30);
                 myPen = new Pen(Color.White);
-                selectColor_G.DrawEllipse(myPen, selectColorX - 16, selectColorY - 16, 32, 32);
+                myBuffer.Graphics.DrawEllipse(myPen, selectColorX - 16, selectColorY - 16, 32, 32);
+                myBuffer.Render(pictureBox1.CreateGraphics());
             }
             catch
             {
@@ -273,17 +297,21 @@ namespace PhotoEgg4._3
         private void Picture_MouseUp(object sender, MouseEventArgs e)
         {
             SelectColo_MouseDownClick = false;
-            Graphics selectColor_G = pictureBox1.CreateGraphics();
-            selectColor_G.DrawImage(SelectColor_BMP, new Rectangle(0, 0, 255, 255));
+            BufferedGraphicsContext currentContext = BufferedGraphicsManager.Current;
+            BufferedGraphics myBuffer = currentContext.Allocate(pictureBox1.CreateGraphics(), pictureBox1.DisplayRectangle);
+
+            //Graphics selectColor_G = pictureBox1.CreateGraphics(); ;
+            myBuffer.Graphics.Clear(Color.White);
+            myBuffer.Graphics.DrawImage(SelectColor_BMP, new Rectangle(0, 0, 255, 255));
             try
             {
                 selectColorX = e.X;
                 selectColorY = e.Y;
                 Pen myPen = new Pen(Color.Black);
-                selectColor_G.DrawEllipse(myPen, selectColorX - 15, selectColorY - 15, 30, 30);
+                myBuffer.Graphics.DrawEllipse(myPen, selectColorX - 15, selectColorY - 15, 30, 30);
                 myPen = new Pen(Color.White);
-                selectColor_G.DrawEllipse(myPen, selectColorX - 16, selectColorY - 16, 32, 32);
-
+                myBuffer.Graphics.DrawEllipse(myPen, selectColorX - 16, selectColorY - 16, 32, 32);
+                myBuffer.Render(pictureBox1.CreateGraphics());
                 Color c = (SelectColor_BMP).GetPixel(e.X, e.Y);
                 PixelDraw_Operate.Color_R = c.R;
                 PixelDraw_Operate.Color_G = c.G;
@@ -294,6 +322,52 @@ namespace PhotoEgg4._3
 
             }
         }
+        private void reflesh()
+        {
+            const int rect = 25;
+            try
+            {
+                for (var j = 0; j < this.DisplayRectangle.Height; j += rect)
+                {
+                    for (var i = 0; i < this.DisplayRectangle.Width; i += rect * 2)
+                    {
+                        if (j % (rect * 2) == 0)
+                        {
+                            this.backGraphics.FillRectangle(Brushes.White, i, j, rect, rect);
+                            this.backGraphics.FillRectangle(Brushes.Gray, i + rect, j, rect, rect);
+                        }
+                        else
+                        {
+                            this.backGraphics.FillRectangle(Brushes.White, i + rect, j, rect, rect);
+                            this.backGraphics.FillRectangle(Brushes.Gray, i, j, rect, rect);
+                        }
+                    }
+                }
+                try
+                {
+                    this.backGraphics.DrawImage(Main_Bitmap, new Rectangle(NowPicture_X, NowPicture_Y, (int)(Main_Bitmap.Width * StretchRange), (int)(Main_Bitmap.Height * StretchRange)));
+                }
+                catch { }
+
+                this.CreateGraphics().DrawImageUnscaled(this.backBmp, 0, 0);
+            }
+            catch { }
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            reflesh();
+
+            /* SelectColor_BMP = (Bitmap)Resources.chooseColor_Rec;
+
+             Graphics selectColor_G = pictureBox1.CreateGraphics();
+             selectColor_G.DrawImage(SelectColor_BMP, new Rectangle(0, 0, 255, 255));
+             Pen myPen = new Pen(Color.Black);
+             selectColor_G.DrawEllipse(myPen, selectColorX - 15, selectColorY - 15, 30, 30);
+             myPen = new Pen(Color.White);
+             selectColor_G.DrawEllipse(myPen, selectColorX - 16, selectColorY - 16, 32, 32);
+             */
+        }
+
         bool SelectFullColor_MouseDown = false;
         private void SelectFullColor_Picture_MouseDown(object sender, MouseEventArgs e)
         {
