@@ -101,11 +101,12 @@ namespace PenDrawing {
 			unsigned char** fp = new unsigned char* [height];
 			int Stride = width * channel, x = 0, y = 0;
 			int x2 = 0; int y2 = 0;
-			//double trans = (double)transparent / 100;
-			//if (trans > 1)trans = 1;
+			double trans = (double)transparent / 100;
+			if (trans > 1)trans = 1;
 			for (int j = 0; j < height; j++)
 				fp[j] = ptr + (Stride * j);
 			int pasteXPoint = pointX * channel;
+			double trans2 = 0;
 			for (y = 0, y2 = 0; y < height && y2 < Brush_height; y++, y2++)
 			{
 				for (x = 0, x2 = 0; x < Stride && x2 < Brush_width * 4; x += channel, x2 += channel)
@@ -113,9 +114,11 @@ namespace PenDrawing {
 					if (x + pasteXPoint >= Stride || x + pasteXPoint < 0 || y + pointY >= height || y + pointY < 0)continue;
 					if (x2 >= Brush_width * 4 || x2 < 0 || y2 >= Brush_height || y2 < 0)continue;
 					if (Brush_fp[y2][x2 + 3] == 0)continue;
-					fp[y + pointY][x + pasteXPoint] = Brush_fp[y2][x2];
-					fp[y + pointY][x + pasteXPoint + 1] = Brush_fp[y2][x2+1];
-					fp[y + pointY][x + pasteXPoint + 2] = Brush_fp[y2][x2+2];
+					trans2 = 0.5;//Brush_fp[y2][x2 + 3] / 100;
+					fp[y + pointY][x + pasteXPoint] = /*fp[y + pointY][x + pasteXPoint]*(1 - trans) +*/ Brush_fp[y2][x2]/* * trans*/;
+					fp[y + pointY][x + pasteXPoint + 1] = /*fp[y + pointY][x + pasteXPoint + 1]*(1 - trans) +*/ Brush_fp[y2][x2+1]/* * trans*/;
+					fp[y + pointY][x + pasteXPoint + 2] = /*fp[y + pointY][x + pasteXPoint + 2]*(1 - trans) + */Brush_fp[y2][x2+2]/* * trans*/;
+					//fp[y + pointY][x + pasteXPoint + 3] = fp[y + pointY][x + pasteXPoint + 3] * (1 - trans) + Brush_fp[y2][x2 + 3] * trans;
 				}
 			}
 
@@ -163,7 +166,10 @@ namespace PenDrawing {
 						Brush_fp[h][w] = Color_B;
 						Brush_fp[h][w + 1] = Color_G;
 						Brush_fp[h][w + 2] = Color_R;
-						Brush_fp[h][w + 3] = 255;
+						/*Brush_fp[h][w + 3] =(unsigned char)(1/(((size / 2) * (size / 2))- 
+							(pow(w / 4 - (Brush_width / 2), 2) + pow(h - (Brush_height / 2), 2)))
+							*100);*/
+						Brush_fp[h][w + 3] =255;
 					}
 					else
 					{

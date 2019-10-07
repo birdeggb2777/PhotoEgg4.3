@@ -1,16 +1,13 @@
 ﻿  PenDrawing.cpp
-E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(345,14): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(346,14): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(347,14): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(369,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(370,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(371,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(351,14): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(352,14): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(353,14): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
 E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(375,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
 E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(376,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
 E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(377,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(380,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
 E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(381,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
 E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(382,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(383,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
 E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(386,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
 E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(387,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
 E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(388,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
@@ -20,4 +17,7 @@ E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(394,15): warnin
 E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(398,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
 E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(399,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
 E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(400,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(404,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(405,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(406,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
   PenDrawing.vcxproj -> E:\桌面碟\專案資料夾\PhotoEgg4.3\x64\Release\PenDrawing.dll
