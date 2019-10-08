@@ -114,11 +114,11 @@ namespace PenDrawing {
 					if (x + pasteXPoint >= Stride || x + pasteXPoint < 0 || y + pointY >= height || y + pointY < 0)continue;
 					if (x2 >= Brush_width * 4 || x2 < 0 || y2 >= Brush_height || y2 < 0)continue;
 					if (Brush_fp[y2][x2 + 3] == 0)continue;
-					trans2 = 0.5;//Brush_fp[y2][x2 + 3] / 100;
-					fp[y + pointY][x + pasteXPoint] = /*fp[y + pointY][x + pasteXPoint]*(1 - trans) +*/ Brush_fp[y2][x2]/* * trans*/;
-					fp[y + pointY][x + pasteXPoint + 1] = /*fp[y + pointY][x + pasteXPoint + 1]*(1 - trans) +*/ Brush_fp[y2][x2+1]/* * trans*/;
-					fp[y + pointY][x + pasteXPoint + 2] = /*fp[y + pointY][x + pasteXPoint + 2]*(1 - trans) + */Brush_fp[y2][x2+2]/* * trans*/;
-					//fp[y + pointY][x + pasteXPoint + 3] = fp[y + pointY][x + pasteXPoint + 3] * (1 - trans) + Brush_fp[y2][x2 + 3] * trans;
+					trans2 =((double)Brush_fp[y2][x2 + 3] /255)*trans;
+					fp[y + pointY][x + pasteXPoint] = (unsigned char)((double)fp[y + pointY][x + pasteXPoint]*(1 - trans2) + (double)Brush_fp[y2][x2]* trans2);
+					fp[y + pointY][x + pasteXPoint + 1] = (unsigned char)((double)fp[y + pointY][x + pasteXPoint + 1]*(1 - trans2) + (double)Brush_fp[y2][x2+1] * trans2);
+					fp[y + pointY][x + pasteXPoint + 2] = (unsigned char)((double)fp[y + pointY][x + pasteXPoint + 2]*(1 - trans2) + (double)Brush_fp[y2][x2+2] * trans2);
+					//fp[y + pointY][x + pasteXPoint + 3] = /*fp[y + pointY][x + pasteXPoint + 3] * (1 - trans) + */Brush_fp[y2][x2 + 3]/* * trans*/;
 				}
 			}
 
@@ -149,7 +149,11 @@ namespace PenDrawing {
 		int Brush_width = 0;
 		int Brush_height = 0;
 		unsigned char** Brush_fp;
-		void CreateBrush(int size) {
+		void CreateBrush(int size,int  sawTouch) {
+			if (sawTouch > 32)sawTouch = 32;
+			if (sawTouch <= 0)sawTouch = 0;
+			//sawTouch = 32 - sawTouch;
+
 			for (int i = 0;i < Brush_height;i++) {
 				delete Brush_fp[i];
 			}
@@ -159,17 +163,24 @@ namespace PenDrawing {
 			Brush_fp = new unsigned char* [Brush_height];
 			for (int j = 0; j < Brush_height; j++)
 				Brush_fp[j] = new unsigned char[Brush_width * 4];
-
+			double temp;
 			for (int h = 0;h < Brush_height;h++) {
 				for (int w = 0; w < Brush_width*4; w += 4) {
-					if (pow(w/4- (Brush_width /2),2)+ pow(h - (Brush_height / 2), 2) <= (size/2)*(size/2)) {
+					if (pow(w/4- (Brush_width /2),2)+ pow(h - (Brush_height / 2), 2) < (size/2)*(size/2)) {
 						Brush_fp[h][w] = Color_B;
 						Brush_fp[h][w + 1] = Color_G;
 						Brush_fp[h][w + 2] = Color_R;
-						/*Brush_fp[h][w + 3] =(unsigned char)(1/(((size / 2) * (size / 2))- 
-							(pow(w / 4 - (Brush_width / 2), 2) + pow(h - (Brush_height / 2), 2)))
-							*100);*/
-						Brush_fp[h][w + 3] =255;
+						if ((double)(size / 2)-(sqrt(pow(w / 4 - (Brush_width / 2), 2) + pow(h - (Brush_height / 2), 2))) < sawTouch)
+						{
+							temp = ((1 - (sqrt(pow(w / 4 - (Brush_width / 2), 2) + pow(h - (Brush_height / 2), 2)) / (double)(size / 2)))
+								* 255);
+							if (temp > 255)temp = 255;
+						}
+						else temp = 255;
+						//if (temp > 254 && temp < 256)temp = 0;
+						Brush_fp[h][w + 3] =(unsigned char)temp;
+						//Brush_fp[h][w + 0] = Brush_fp[h][w +1] = Brush_fp[h][w +2] = Brush_fp[h][w + 3];
+						//Brush_fp[h][w + 3] =255;
 					}
 					else
 					{

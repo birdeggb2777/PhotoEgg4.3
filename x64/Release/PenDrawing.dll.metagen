@@ -21,7 +21,7 @@ Class PenDrawing.DrawClass: AutoLayout, AnsiClass, Class, Public, BeforeFieldIni
   Methods:
     Black(Byte*, Int32, Int32, Int32, Int32, Int32, Int32, Int32): PrivateScope, Public, HideBySig
     BlackBrush(Byte*, Int32, Int32, Int32, Int32, Int32, Int32): PrivateScope, Public, HideBySig
-    CreateBrush(Int32): PrivateScope, Public, HideBySig
+    CreateBrush(Int32, Int32): PrivateScope, Public, HideBySig
     colorOrder(Byte* IsImplicitlyDereferenced, Byte* IsImplicitlyDereferenced, Byte* IsImplicitlyDereferenced, Int32): PrivateScope, Public, Static, HideBySig
     ConvertHSV_(Byte*, Int32, Int32, Int32, Int32, Int32, Int32, Boolean(HasFieldMarshal), Int32, Int32, Int32): PrivateScope, Public, Static, HideBySig
     ConvertHSV(Byte*, Int32, Int32, Int32, Int32, Int32, Int32, Boolean(HasFieldMarshal), Int32): PrivateScope, Public, HideBySig

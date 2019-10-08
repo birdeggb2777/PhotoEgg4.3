@@ -179,13 +179,15 @@ namespace PhotoEgg4._3
             int transparent = 100;
             try
             {
-                size = Int32.Parse(PenSizeText1.Text);
-                PixelDraw_Operate.CreateBrush(size);
+               // size = Int32.Parse(PenSizeText1.Text);
+                size = (int)(numericUpDown1.Value);
+                PixelDraw_Operate.CreateBrush(size, (int)(numericUpDown3.Value));
             }
             catch { }
             try
             {
-                transparent = Int32.Parse(TransparentText.Text);
+                // transparent = Int32.Parse(TransparentText.Text);
+                transparent= (int)(numericUpDown2.Value);
                 if (transparent > 100) transparent = 100;
             }
             catch { }
@@ -227,7 +229,7 @@ namespace PhotoEgg4._3
             }
             MyNewBmp.UnlockBits(MyBmpData);
         }
-        private void PenSizeText1_KeyPress(object sender, KeyPressEventArgs e)
+      /*  private void PenSizeText1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (((int)e.KeyChar < 48 | (int)e.KeyChar > 57) & (int)e.KeyChar != 8)
             {
@@ -240,7 +242,7 @@ namespace PhotoEgg4._3
             {
                 e.Handled = true;
             }
-        }
+        }*/
         private void Picture_MouseDown(object sender, MouseEventArgs e)
         {
             SelectColo_MouseDownClick = true;
