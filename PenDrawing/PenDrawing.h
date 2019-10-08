@@ -117,9 +117,9 @@ namespace PenDrawing {
 					if (x2 >= Brush_width * 4 || x2 < 0 || y2 >= Brush_height || y2 < 0)continue;
 					if (Brush_fp[y2][x2 + 3] == 0)continue;
 					trans2 = ((double)Brush_fp[y2][x2 + 3] / 255) * trans;
-					fp[y + pointY][x + pasteXPoint] = (unsigned char)((double)fp[y + pointY][x + pasteXPoint] * (1 - trans2) + (double)Brush_fp[y2][x2] * trans2);
-					fp[y + pointY][x + pasteXPoint + 1] = (unsigned char)((double)fp[y + pointY][x + pasteXPoint + 1] * (1 - trans2) + (double)Brush_fp[y2][x2 + 1] * trans2);
-					fp[y + pointY][x + pasteXPoint + 2] = (unsigned char)((double)fp[y + pointY][x + pasteXPoint + 2] * (1 - trans2) + (double)Brush_fp[y2][x2 + 2] * trans2);
+					fp[y + pointY][x + pasteXPoint] = (unsigned char)((double)Reference_fp[y + pointY][x + pasteXPoint] * (1 - trans2) + (double)Brush_fp[y2][x2] * trans2);
+					fp[y + pointY][x + pasteXPoint + 1] = (unsigned char)((double)Reference_fp[y + pointY][x + pasteXPoint + 1] * (1 - trans2) + (double)Brush_fp[y2][x2 + 1] * trans2);
+					fp[y + pointY][x + pasteXPoint + 2] = (unsigned char)((double)Reference_fp[y + pointY][x + pasteXPoint + 2] * (1 - trans2) + (double)Brush_fp[y2][x2 + 2] * trans2);
 					unMark = Brush_fp[y2][x2 + 3];
 					UnSharp_Mark_fp[y + pointY][(x + pasteXPoint) / 4] = unMark;
 					//if (unMark + UnSharp_Mark_fp[y + pointY][(x + pasteXPoint) / 4] > 255)UnSharp_Mark_fp[y + pointY][(x + pasteXPoint) / 4] = 255;
@@ -144,7 +144,45 @@ namespace PenDrawing {
 				}
 				delete[] fp;*/
 		}
+		int Reference_width = 0;
+		int Reference_height = 0;
+		unsigned char** Reference_fp;
+		/*if (y < 0 || y >= height || x < 0 || x >= Stride)
+		*/
+		void CreateUnSharpMark(unsigned char* ptr, int width, int height, int channel) {
+			unsigned char** fp = new unsigned char* [height];
+			int Stride = width * channel;
+			for (int j = 0; j < height; j++)
+				fp[j] = ptr + (Stride * j);
 
+			if (width == Reference_width && height == Reference_height && Reference_fp) {
+				for (int h = 0; h < height; h++) {
+					for (int w = 0; w < width * channel; w += channel) {
+						Reference_fp[h][w] = fp[h][w];
+						Reference_fp[h][w+1] = fp[h][w + 1];
+						Reference_fp[h][w+2] = fp[h][w + 2];
+						Reference_fp[h][w+3] = fp[h][w + 3];
+					}
+				}
+				return;
+			}
+			for (int i = 0; i < Reference_height; i++) {
+				delete Reference_fp[i];
+			}
+			Reference_fp = new unsigned char* [height];
+			for (int j = 0; j < height; j++)
+				Reference_fp[j] = new unsigned char[width*channel];
+			for (int h = 0; h < height; h++) {
+				for (int w = 0; w < width * channel; w += channel) {
+					Reference_fp[h][w] = fp[h][w];
+					Reference_fp[h][w+1] = fp[h][w + 1];
+					Reference_fp[h][w+2] = fp[h][w + 2];
+					Reference_fp[h][w+3] = fp[h][w + 3];
+				}
+			}
+			Reference_width = width;
+			Reference_height = height;
+		}
 
 
 
@@ -152,7 +190,7 @@ namespace PenDrawing {
 		int UnSharp_Mark_height = 0;
 		unsigned char** UnSharp_Mark_fp;
 		void CreateUnSharpMark(int width, int height) {
-			if (width == UnSharp_Mark_width && height == UnSharp_Mark_height&& UnSharp_Mark_fp) {
+			if (width == UnSharp_Mark_width && height == UnSharp_Mark_height && UnSharp_Mark_fp) {
 				for (int h = 0; h < height; h++) {
 					for (int w = 0; w < width; w++) {
 						UnSharp_Mark_fp[h][w] = 0;
@@ -201,15 +239,12 @@ namespace PenDrawing {
 						Brush_fp[h][w + 2] = Color_R;
 						if ((double)(size / 2) - (sqrt(pow(w / 4 - (Brush_width / 2), 2) + pow(h - (Brush_height / 2), 2))) < sawTouch)
 						{
-							temp = ((1 - (sqrt(pow(w / 4 - (Brush_width / 2), 2) + pow(h - (Brush_height / 2), 2)) / (double)(size / 2)))
+							temp = ((((double)(size / 2)-sqrt(pow(w / 4 - (Brush_width / 2), 2) + pow(h - (Brush_height / 2), 2)))/(double)sawTouch)
 								* 255);
 							if (temp > 255)temp = 255;
 						}
 						else temp = 255;
-						//if (temp > 254 && temp < 256)temp = 0;
 						Brush_fp[h][w + 3] = (unsigned char)temp;
-						//Brush_fp[h][w + 0] = Brush_fp[h][w +1] = Brush_fp[h][w +2] = Brush_fp[h][w + 3];
-						//Brush_fp[h][w + 3] =255;
 					}
 					else
 					{

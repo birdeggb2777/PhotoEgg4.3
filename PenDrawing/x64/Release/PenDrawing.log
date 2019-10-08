@@ -1,23 +1,23 @@
 ﻿  PenDrawing.cpp
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(391): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(392): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(393): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(415): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(416): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(417): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(421): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(422): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(423): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(426): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(427): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(428): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(432): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(433): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(434): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(438): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(439): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(440): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(444): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(445): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\PenDrawing\PenDrawing.h(446): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
-  PenDrawing.vcxproj -> C:\Users\user\Desktop\陳增澤\gitegg3\PhotoEgg4.3\PhotoEgg4.3\x64\Release\PenDrawing.dll
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(426,14): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(427,14): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(428,14): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(450,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(451,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(452,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(456,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(457,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(458,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(461,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(462,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(463,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(467,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(468,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(469,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(473,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(474,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(475,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(479,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(480,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+E:\桌面碟\專案資料夾\PhotoEgg4.3\PenDrawing\PenDrawing.h(481,15): warning C4244: '=': 將 'double' 轉換為 'unsigned char'，由於類型不同，可能導致資料遺失
+  PenDrawing.vcxproj -> E:\桌面碟\專案資料夾\PhotoEgg4.3\x64\Release\PenDrawing.dll

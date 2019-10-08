@@ -152,6 +152,19 @@ namespace PhotoEgg4._3
                 PixelDraw_Operate.CreateBrush(size, (int)(numericUpDown3.Value));
             }
             catch { }
+            try
+            {
+                unsafe
+                {
+                    Bitmap MyNewBmp = (Bitmap)Main_Bitmap;
+                    Rectangle MyRec = new Rectangle(0, 0, MyNewBmp.Width, MyNewBmp.Height);
+                    BitmapData MyBmpData = MyNewBmp.LockBits(MyRec, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+                    PixelDraw_Operate.CreateUnSharpMark((byte*)(MyBmpData.Scan0), MyNewBmp.Width, MyNewBmp.Height, 4);
+                    MyNewBmp.UnlockBits(MyBmpData);
+                }
+            }
+            catch { }
+            
             PixelDraw_Operate.CreateUnSharpMark(Main_Bitmap.Width, Main_Bitmap.Height);
             try
             {
