@@ -144,6 +144,15 @@ namespace PhotoEgg4._3
 
         private void Form_MouseDown(object sender, MouseEventArgs e)
         {
+            int size = 20;
+            try
+            {
+                // size = Int32.Parse(PenSizeText1.Text);
+                size = (int)(numericUpDown1.Value);
+                PixelDraw_Operate.CreateBrush(size, (int)(numericUpDown3.Value));
+            }
+            catch { }
+            PixelDraw_Operate.CreateUnSharpMark(Main_Bitmap.Width, Main_Bitmap.Height);
             try
             {
                 Mouse_X2 = e.X;
@@ -175,15 +184,8 @@ namespace PhotoEgg4._3
         private void DrawBrush(int OpointX, int OpointY, int pointX, int pointY)
         {
 
-            int size = 20;
             int transparent = 100;
-            try
-            {
-               // size = Int32.Parse(PenSizeText1.Text);
-                size = (int)(numericUpDown1.Value);
-                PixelDraw_Operate.CreateBrush(size, (int)(numericUpDown3.Value));
-            }
-            catch { }
+           
             try
             {
                 // transparent = Int32.Parse(TransparentText.Text);

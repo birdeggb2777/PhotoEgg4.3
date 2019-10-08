@@ -107,17 +107,23 @@ namespace PenDrawing {
 				fp[j] = ptr + (Stride * j);
 			int pasteXPoint = pointX * channel;
 			double trans2 = 0;
+			int unMark = 0;
 			for (y = 0, y2 = 0; y < height && y2 < Brush_height; y++, y2++)
 			{
 				for (x = 0, x2 = 0; x < Stride && x2 < Brush_width * 4; x += channel, x2 += channel)
 				{
+					if (UnSharp_Mark_fp[y + pointY][(x + pasteXPoint) / 4] >= Brush_fp[y2][x2 + 3])continue;
 					if (x + pasteXPoint >= Stride || x + pasteXPoint < 0 || y + pointY >= height || y + pointY < 0)continue;
 					if (x2 >= Brush_width * 4 || x2 < 0 || y2 >= Brush_height || y2 < 0)continue;
 					if (Brush_fp[y2][x2 + 3] == 0)continue;
-					trans2 =((double)Brush_fp[y2][x2 + 3] /255)*trans;
-					fp[y + pointY][x + pasteXPoint] = (unsigned char)((double)fp[y + pointY][x + pasteXPoint]*(1 - trans2) + (double)Brush_fp[y2][x2]* trans2);
-					fp[y + pointY][x + pasteXPoint + 1] = (unsigned char)((double)fp[y + pointY][x + pasteXPoint + 1]*(1 - trans2) + (double)Brush_fp[y2][x2+1] * trans2);
-					fp[y + pointY][x + pasteXPoint + 2] = (unsigned char)((double)fp[y + pointY][x + pasteXPoint + 2]*(1 - trans2) + (double)Brush_fp[y2][x2+2] * trans2);
+					trans2 = ((double)Brush_fp[y2][x2 + 3] / 255) * trans;
+					fp[y + pointY][x + pasteXPoint] = (unsigned char)((double)fp[y + pointY][x + pasteXPoint] * (1 - trans2) + (double)Brush_fp[y2][x2] * trans2);
+					fp[y + pointY][x + pasteXPoint + 1] = (unsigned char)((double)fp[y + pointY][x + pasteXPoint + 1] * (1 - trans2) + (double)Brush_fp[y2][x2 + 1] * trans2);
+					fp[y + pointY][x + pasteXPoint + 2] = (unsigned char)((double)fp[y + pointY][x + pasteXPoint + 2] * (1 - trans2) + (double)Brush_fp[y2][x2 + 2] * trans2);
+					unMark = Brush_fp[y2][x2 + 3];
+					UnSharp_Mark_fp[y + pointY][(x + pasteXPoint) / 4] = unMark;
+					//if (unMark + UnSharp_Mark_fp[y + pointY][(x + pasteXPoint) / 4] > 255)UnSharp_Mark_fp[y + pointY][(x + pasteXPoint) / 4] = 255;
+					//else UnSharp_Mark_fp[y + pointY][(x + pasteXPoint) / 4] += unMark;
 					//fp[y + pointY][x + pasteXPoint + 3] = /*fp[y + pointY][x + pasteXPoint + 3] * (1 - trans) + */Brush_fp[y2][x2 + 3]/* * trans*/;
 				}
 			}
@@ -142,19 +148,42 @@ namespace PenDrawing {
 
 
 
-
-
-
+		int UnSharp_Mark_width = 0;
+		int UnSharp_Mark_height = 0;
+		unsigned char** UnSharp_Mark_fp;
+		void CreateUnSharpMark(int width, int height) {
+			if (width == UnSharp_Mark_width && height == UnSharp_Mark_height&& UnSharp_Mark_fp) {
+				for (int h = 0; h < height; h++) {
+					for (int w = 0; w < width; w++) {
+						UnSharp_Mark_fp[h][w] = 0;
+					}
+				}
+				return;
+			}
+			for (int i = 0; i < UnSharp_Mark_height; i++) {
+				delete UnSharp_Mark_fp[i];
+			}
+			UnSharp_Mark_fp = new unsigned char* [height];
+			for (int j = 0; j < height; j++)
+				UnSharp_Mark_fp[j] = new unsigned char[width];
+			for (int h = 0; h < height; h++) {
+				for (int w = 0; w < width; w++) {
+					UnSharp_Mark_fp[h][w] = 0;
+				}
+			}
+			UnSharp_Mark_width = width;
+			UnSharp_Mark_height = height;
+		}
 
 		int Brush_width = 0;
 		int Brush_height = 0;
 		unsigned char** Brush_fp;
-		void CreateBrush(int size,int  sawTouch) {
+		void CreateBrush(int size, int  sawTouch) {
 			if (sawTouch > 32)sawTouch = 32;
 			if (sawTouch <= 0)sawTouch = 0;
 			//sawTouch = 32 - sawTouch;
 
-			for (int i = 0;i < Brush_height;i++) {
+			for (int i = 0; i < Brush_height; i++) {
 				delete Brush_fp[i];
 			}
 			Brush_width = size;
@@ -164,13 +193,13 @@ namespace PenDrawing {
 			for (int j = 0; j < Brush_height; j++)
 				Brush_fp[j] = new unsigned char[Brush_width * 4];
 			double temp;
-			for (int h = 0;h < Brush_height;h++) {
-				for (int w = 0; w < Brush_width*4; w += 4) {
-					if (pow(w/4- (Brush_width /2),2)+ pow(h - (Brush_height / 2), 2) < (size/2)*(size/2)) {
+			for (int h = 0; h < Brush_height; h++) {
+				for (int w = 0; w < Brush_width * 4; w += 4) {
+					if (pow(w / 4 - (Brush_width / 2), 2) + pow(h - (Brush_height / 2), 2) < (size / 2) * (size / 2)) {
 						Brush_fp[h][w] = Color_B;
 						Brush_fp[h][w + 1] = Color_G;
 						Brush_fp[h][w + 2] = Color_R;
-						if ((double)(size / 2)-(sqrt(pow(w / 4 - (Brush_width / 2), 2) + pow(h - (Brush_height / 2), 2))) < sawTouch)
+						if ((double)(size / 2) - (sqrt(pow(w / 4 - (Brush_width / 2), 2) + pow(h - (Brush_height / 2), 2))) < sawTouch)
 						{
 							temp = ((1 - (sqrt(pow(w / 4 - (Brush_width / 2), 2) + pow(h - (Brush_height / 2), 2)) / (double)(size / 2)))
 								* 255);
@@ -178,7 +207,7 @@ namespace PenDrawing {
 						}
 						else temp = 255;
 						//if (temp > 254 && temp < 256)temp = 0;
-						Brush_fp[h][w + 3] =(unsigned char)temp;
+						Brush_fp[h][w + 3] = (unsigned char)temp;
 						//Brush_fp[h][w + 0] = Brush_fp[h][w +1] = Brush_fp[h][w +2] = Brush_fp[h][w + 3];
 						//Brush_fp[h][w + 3] =255;
 					}
