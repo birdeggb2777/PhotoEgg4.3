@@ -158,5 +158,8 @@
   <ItemGroup>
     <None Include="Resources\ColorFull.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chooseColor_Rec2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

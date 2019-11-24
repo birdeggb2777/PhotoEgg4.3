@@ -121,8 +121,8 @@
   <data name="Left_Point_Click" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Left_Point_Click.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Left_Brush_Click" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Left_Brush_Click.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Title" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Title.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="chooseColor_Rec" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\chooseColor_Rec.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,19 +133,22 @@
   <data name="Left_Brush" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Left_Brush.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ColorFull" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ColorFull.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Left_Hand1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Left_Hand1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Left_Hand" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Left_Hand.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Title" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Title.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Left_Brush_Click" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Left_Brush_Click.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Title1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Title1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ColorFull" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ColorFull.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="chooseColor_Rec2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chooseColor_Rec2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

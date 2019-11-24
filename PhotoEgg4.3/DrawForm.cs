@@ -33,7 +33,8 @@ namespace PhotoEgg4._3
         int selectColorY = 0;
         int selectFullColor = 0;
         double StretchRange = 1;
-        Bitmap SelectColor_BMP = (Bitmap)Resources.chooseColor_Rec;
+        Bitmap SelectColor_BMP = (Bitmap)Resources.chooseColor_Rec2;
+        Bitmap chooseColor_Rec2_NowColor = Resources.chooseColor_Rec2;
         Graphics g;
         ImageList imageList1;
         DrawClass PixelDraw_Operate = new DrawClass();
@@ -60,6 +61,8 @@ namespace PhotoEgg4._3
             this.backGraphics = Graphics.FromImage(backBmp);
             this.MouseWheel += new MouseEventHandler(MouseWheelHandler);
             this.Paint += new PaintEventHandler(Form_Paint);
+            SelectRectColorPicture.Size = Resources.chooseColor_Rec2.Size;
+            SelectFullColor_Picture.Size = Resources.ColorFull.Size;
         }
         private void MouseWheelHandler(object sender, System.Windows.Forms.MouseEventArgs e)
         {
@@ -111,6 +114,7 @@ namespace PhotoEgg4._3
         }
         private void Form_MouseMove(object sender, MouseEventArgs e)
         {
+            menuStrip1.Focus();
             try
             {
                 Mouse_X2 = e.X;
@@ -164,8 +168,9 @@ namespace PhotoEgg4._3
                 }
             }
             catch { }
-            
-            PixelDraw_Operate.CreateUnSharpMark(Main_Bitmap.Width, Main_Bitmap.Height);
+
+            try { PixelDraw_Operate.CreateUnSharpMark(Main_Bitmap.Width, Main_Bitmap.Height); }
+            catch { }
             try
             {
                 Mouse_X2 = e.X;
@@ -258,15 +263,32 @@ namespace PhotoEgg4._3
                 e.Handled = true;
             }
         }*/
-        private void Picture_MouseDown(object sender, MouseEventArgs e)
+        private void SelectRectColorPicture_MouseDown(object sender, MouseEventArgs e)
         {
             SelectColo_MouseDownClick = true;
-            BufferedGraphicsContext currentContext = BufferedGraphicsManager.Current;
-            BufferedGraphics myBuffer = currentContext.Allocate(pictureBox1.CreateGraphics(), pictureBox1.DisplayRectangle);
+            refleshSelectRectColorPicture(sender, e);
+        }
+        private void SelectRectColorPicture_MouseMove(object sender, MouseEventArgs e)
+        {
+            refleshSelectRectColorPicture(sender, e);
+        }
+        private void SelectRectColorPicture_MouseUp(object sender, MouseEventArgs e)
+        {
+            SelectColo_MouseDownClick = false;
+            refleshSelectRectColorPicture(sender, e);
+        }
+        private void refleshSelectRectColorPicture(object sender, MouseEventArgs e)
+        {
+
+            if (SelectColo_MouseDownClick == false) return;
+            Bitmap chooseColor_Rec2 = (Bitmap)chooseColor_Rec2_NowColor.Clone();
+            Graphics chooseColor_Rec2_G = Graphics.FromImage(chooseColor_Rec2);
+            // BufferedGraphicsContext currentContext = BufferedGraphicsManager.Current;
+            // BufferedGraphics myBuffer = currentContext.Allocate(Graphics.FromImage(chooseColor_Rec2), SelectRectColorPicture.DisplayRectangle);
 
             //Graphics selectColor_G = pictureBox1.CreateGraphics(); ;
-            myBuffer.Graphics.Clear(Color.White);
-            myBuffer.Graphics.DrawImage(SelectColor_BMP, new Rectangle(0, 0, 255, 255));
+            // myBuffer.Graphics.Clear(Color.White);
+            chooseColor_Rec2_G.DrawImage(chooseColor_Rec2_NowColor, new Rectangle(0, 0, chooseColor_Rec2.Width, chooseColor_Rec2.Height));
             try
             {
                 // Color c = (SelectColor_BMP).GetPixel(e.X, e.Y);
@@ -274,61 +296,10 @@ namespace PhotoEgg4._3
                 selectColorX = e.X;
                 selectColorY = e.Y;
                 Pen myPen = new Pen(Color.Black);
-                myBuffer.Graphics.DrawEllipse(myPen, selectColorX - 15, selectColorY - 15, 30, 30);
+                chooseColor_Rec2_G.DrawEllipse(myPen, selectColorX - 15, selectColorY - 15, 30, 30);
                 myPen = new Pen(Color.White);
-                myBuffer.Graphics.DrawEllipse(myPen, selectColorX - 16, selectColorY - 16, 32, 32);
-                myBuffer.Render(pictureBox1.CreateGraphics());
-            }
-            catch
-            {
-
-            }
-        }
-        private void Picture_MouseMove(object sender, MouseEventArgs e)
-        {
-            BufferedGraphicsContext currentContext = BufferedGraphicsManager.Current;
-            BufferedGraphics myBuffer = currentContext.Allocate(pictureBox1.CreateGraphics(), pictureBox1.DisplayRectangle);
-
-            //Graphics selectColor_G = pictureBox1.CreateGraphics(); ;
-            myBuffer.Graphics.Clear(Color.White);
-            myBuffer.Graphics.DrawImage(SelectColor_BMP, new Rectangle(0, 0, 255, 255));
-            try
-            {
-                if (SelectColo_MouseDownClick == true)
-                {
-                    selectColorX = e.X;
-                    selectColorY = e.Y;
-
-                }
-                Pen myPen = new Pen(Color.Black);
-                myBuffer.Graphics.DrawEllipse(myPen, selectColorX - 15, selectColorY - 15, 30, 30);
-                myPen = new Pen(Color.White);
-                myBuffer.Graphics.DrawEllipse(myPen, selectColorX - 16, selectColorY - 16, 32, 32);
-                myBuffer.Render(pictureBox1.CreateGraphics());
-            }
-            catch
-            {
-
-            }
-        }
-        private void Picture_MouseUp(object sender, MouseEventArgs e)
-        {
-            SelectColo_MouseDownClick = false;
-            BufferedGraphicsContext currentContext = BufferedGraphicsManager.Current;
-            BufferedGraphics myBuffer = currentContext.Allocate(pictureBox1.CreateGraphics(), pictureBox1.DisplayRectangle);
-
-            //Graphics selectColor_G = pictureBox1.CreateGraphics(); ;
-            myBuffer.Graphics.Clear(Color.White);
-            myBuffer.Graphics.DrawImage(SelectColor_BMP, new Rectangle(0, 0, 255, 255));
-            try
-            {
-                selectColorX = e.X;
-                selectColorY = e.Y;
-                Pen myPen = new Pen(Color.Black);
-                myBuffer.Graphics.DrawEllipse(myPen, selectColorX - 15, selectColorY - 15, 30, 30);
-                myPen = new Pen(Color.White);
-                myBuffer.Graphics.DrawEllipse(myPen, selectColorX - 16, selectColorY - 16, 32, 32);
-                myBuffer.Render(pictureBox1.CreateGraphics());
+                chooseColor_Rec2_G.DrawEllipse(myPen, selectColorX - 16, selectColorY - 16, 32, 32);
+               // myBuffer.Render(Graphics.FromImage(chooseColor_Rec2));
                 Color c = (SelectColor_BMP).GetPixel(e.X, e.Y);
                 PixelDraw_Operate.Color_R = c.R;
                 PixelDraw_Operate.Color_G = c.G;
@@ -338,6 +309,7 @@ namespace PhotoEgg4._3
             {
 
             }
+            SelectRectColorPicture.Image = chooseColor_Rec2;
         }
         private void reflesh()
         {
@@ -370,35 +342,18 @@ namespace PhotoEgg4._3
             }
             catch { }
         }
-        private void timer1_Tick(object sender, EventArgs e)
+        private void  RefleshSelectFull(object sender, MouseEventArgs e)
         {
-            reflesh();
-
-            /* SelectColor_BMP = (Bitmap)Resources.chooseColor_Rec;
-
-             Graphics selectColor_G = pictureBox1.CreateGraphics();
-             selectColor_G.DrawImage(SelectColor_BMP, new Rectangle(0, 0, 255, 255));
-             Pen myPen = new Pen(Color.Black);
-             selectColor_G.DrawEllipse(myPen, selectColorX - 15, selectColorY - 15, 30, 30);
-             myPen = new Pen(Color.White);
-             selectColor_G.DrawEllipse(myPen, selectColorX - 16, selectColorY - 16, 32, 32);
-             */
-        }
-
-        bool SelectFullColor_MouseDown = false;
-        private void SelectFullColor_Picture_MouseDown(object sender, MouseEventArgs e)
-        {
-            SelectFullColor_MouseDown = true;
-        }
-        private void SelectFullColor_Picture_MouseMove(object sender, MouseEventArgs e)
-        {
-            Graphics SelectFullColor_G = SelectFullColor_Picture.CreateGraphics(); ;
+            Bitmap ColorFullBitmap = Resources.ColorFull;
+            Graphics SelectFullColor_G = Graphics.FromImage(ColorFullBitmap);//  SelectFullColor_Picture.CreateGraphics(); ;
             SelectFullColor_G.DrawImage(Resources.ColorFull, new Rectangle(0, 0, Resources.ColorFull.Width, Resources.ColorFull.Height));
             if (SelectFullColor_MouseDown == true)
             {
                 Pen myPen = new Pen(Color.Black);
-                SelectFullColor_G.DrawRectangle(myPen, 0, e.Y - 10, 36, 20);
-                SelectColor_BMP = (Bitmap)Resources.chooseColor_Rec;
+                SelectFullColor_G.DrawRectangle(myPen, 0, e.Y - 10, ColorFullBitmap.Width-1, 20);
+                SelectFullColor_Picture.Image = ColorFullBitmap;
+                
+                SelectColor_BMP = (Bitmap)Resources.chooseColor_Rec2;
                 Bitmap MyNewBmp = (Bitmap)SelectColor_BMP;
                 Rectangle MyRec = new Rectangle(0, 0, MyNewBmp.Width, MyNewBmp.Height);
                 BitmapData MyBmpData = MyNewBmp.LockBits(MyRec, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
@@ -414,26 +369,58 @@ namespace PhotoEgg4._3
                 }
                 try
                 {
-                    Graphics selectColor_G = pictureBox1.CreateGraphics();
-                    selectColor_G.DrawImage(SelectColor_BMP, new Rectangle(0, 0, 255, 255));
+                    Graphics selectColor_G = Graphics.FromImage(MyNewBmp);// pictureBox1.CreateGraphics();
+                    selectColor_G.DrawImage(SelectColor_BMP, new Rectangle(0, 0, MyNewBmp.Width, MyNewBmp.Height));
+                    selectColor_G.Dispose();
+                    chooseColor_Rec2_NowColor = new Bitmap((Bitmap)MyNewBmp);
+
+                    selectColor_G = Graphics.FromImage(MyNewBmp);
                     myPen = new Pen(Color.Black);
                     selectColor_G.DrawEllipse(myPen, selectColorX - 15, selectColorY - 15, 30, 30);
                     myPen = new Pen(Color.White);
                     selectColor_G.DrawEllipse(myPen, selectColorX - 16, selectColorY - 16, 32, 32);
 
-
+                    SelectRectColorPicture.Image = MyNewBmp;
+                 
                     Color c = (SelectColor_BMP).GetPixel(selectColorX, selectColorY);
                     PixelDraw_Operate.Color_R = c.R;
                     PixelDraw_Operate.Color_G = c.G;
                     PixelDraw_Operate.Color_B = c.B;
                 }
-                catch { }
+                catch { MessageBox.Show("error"); }
             }
+
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            reflesh();
+
+            /* SelectColor_BMP = (Bitmap)Resources.chooseColor_Rec2;
+
+             Graphics selectColor_G = pictureBox1.CreateGraphics();
+             selectColor_G.DrawImage(SelectColor_BMP, new Rectangle(0, 0, 255, 255));
+             Pen myPen = new Pen(Color.Black);
+             selectColor_G.DrawEllipse(myPen, selectColorX - 15, selectColorY - 15, 30, 30);
+             myPen = new Pen(Color.White);
+             selectColor_G.DrawEllipse(myPen, selectColorX - 16, selectColorY - 16, 32, 32);
+             */
+        }
+
+        bool SelectFullColor_MouseDown = false;
+        private void SelectFullColor_Picture_MouseDown(object sender, MouseEventArgs e)
+        {
+            SelectFullColor_MouseDown = true;
+            RefleshSelectFull(sender, e);
+        }
+        private void SelectFullColor_Picture_MouseMove(object sender, MouseEventArgs e)
+        {
+            RefleshSelectFull(sender, e);
         }
         private void SelectFullColor_Picture_MouseUp(object sender, MouseEventArgs e)
         {
             SelectFullColor_MouseDown = false;
-            SelectColor_BMP = (Bitmap)Resources.chooseColor_Rec;
+            RefleshSelectFull(sender, e);
+           /* SelectColor_BMP = (Bitmap)Resources.chooseColor_Rec2;
             Bitmap MyNewBmp = (Bitmap)SelectColor_BMP;
             Rectangle MyRec = new Rectangle(0, 0, MyNewBmp.Width, MyNewBmp.Height);
             BitmapData MyBmpData = MyNewBmp.LockBits(MyRec, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
@@ -462,7 +449,7 @@ namespace PhotoEgg4._3
                 PixelDraw_Operate.Color_G = c.G;
                 PixelDraw_Operate.Color_B = c.B;
             }
-            catch { }
+            catch { }*/
         }
     }
 }
