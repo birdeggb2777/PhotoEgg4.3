@@ -111,9 +111,9 @@ namespace PenDrawing {
 			for (y = 0, y2 = 0; y < height && y2 < Brush_height; y++, y2++)
 			{
 				for (x = 0, x2 = 0; x < Stride && x2 < Brush_width * 4; x += channel, x2 += channel)
-				{
-					if (UnSharp_Mark_fp[y + pointY][(x + pasteXPoint) / 4] >= Brush_fp[y2][x2 + 3])continue;
+				{		
 					if (x + pasteXPoint >= Stride || x + pasteXPoint < 0 || y + pointY >= height || y + pointY < 0)continue;
+					if (UnSharp_Mark_fp[y + pointY][(x + pasteXPoint) / 4] >= Brush_fp[y2][x2 + 3])continue;
 					if (x2 >= Brush_width * 4 || x2 < 0 || y2 >= Brush_height || y2 < 0)continue;
 					if (Brush_fp[y2][x2 + 3] == 0)continue;
 					trans2 = ((double)Brush_fp[y2][x2 + 3] / 255) * trans;
