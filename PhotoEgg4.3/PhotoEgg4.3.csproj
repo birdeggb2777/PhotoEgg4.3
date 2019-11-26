@@ -147,12 +147,6 @@
     <None Include="Resources\Title1.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PenDrawing\PenDrawing.vcxproj">
-      <Project>{c393a812-f6d3-464f-825f-190d73d3a3af}</Project>
-      <Name>PenDrawing</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\chooseColor_Rec.png" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +154,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\chooseColor_Rec2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PenDrawing\PenDrawing.vcxproj">
+      <Project>{c393a812-f6d3-464f-825f-190d73d3a3af}</Project>
+      <Name>PenDrawing</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

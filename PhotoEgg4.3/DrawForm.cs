@@ -136,6 +136,7 @@ namespace PhotoEgg4._3
                     // this.backGraphics.DrawImage(Main_Bitmap, new Rectangle(NowPicture_X, NowPicture_Y, (int)(Main_Bitmap.Width * StretchRange), (int)(Main_Bitmap.Height * StretchRange)));
                     // this.CreateGraphics().DrawImageUnscaled(this.backBmp, 0, 0);
                 }
+                
                 reflesh();
                 Mouse_X1 = e.X;
                 Mouse_Y1 = e.Y;
@@ -190,14 +191,54 @@ namespace PhotoEgg4._3
             {
                 Mouse_X2 = e.X;
                 Mouse_Y2 = e.Y;
-                MouseDownClick = false;
+               
                 Mouse_X1 = e.X;
                 Mouse_Y1 = e.Y;
+                if (MouseDownClick == true && tabControl1.SelectedTab == tabControl1.TabPages[3])
+                {
+ 
+                    DrawOil(Mouse_X1 - NowPicture_X, Mouse_Y1 - NowPicture_Y, Mouse_X2 - NowPicture_X, Mouse_Y2 - NowPicture_Y);
+                
+                }
+               
             }
             catch
             {
-
+                MessageBox.Show("");
             }
+ MouseDownClick = false;
+        }
+        private void DrawOil(int OpointX, int OpointY, int pointX, int pointY)
+        {
+
+            int transparent = 100;
+            try
+            {
+                // transparent = Int32.Parse(TransparentText.Text);
+                transparent = (int)(numericUpDown2.Value);
+                if (transparent > 100) transparent = 100;
+            }
+            catch { }
+            int Line = (int)Math.Sqrt((double)(OpointX * OpointX + OpointY * OpointY));
+            Bitmap MyNewBmp = (Bitmap)Main_Bitmap;
+            Rectangle MyRec = new Rectangle(0, 0, MyNewBmp.Width, MyNewBmp.Height);
+            BitmapData MyBmpData = MyNewBmp.LockBits(MyRec, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+
+
+                // PixelDraw_Operate.BlackBrush((byte*)(MyBmpData.Scan0), MyNewBmp.Width, MyNewBmp.Height, 4, (int)(50 / StretchRange), (int)(50 / StretchRange), transparent);
+
+                int Reduce_X = OpointX > pointX ? pointX : OpointX;
+                int Reduce_Y = OpointY > pointY ? pointY : OpointY;
+                int Up_X = OpointX < pointX ? pointX : OpointX;
+                int Up_Y = OpointY < pointY ? pointY : OpointY;
+                int X = (int)(Reduce_X + (double)Math.Abs(OpointX - pointX) / (double)Line * 1);
+                int Y = (int)(Up_Y + -(double)Math.Abs(OpointY - pointY) / (double)Line * 1);
+                unsafe
+                {
+                    PixelDraw_Operate.FillOil((byte*)(MyBmpData.Scan0), MyNewBmp.Width, MyNewBmp.Height, 4, (int)(X / StretchRange), (int)(Y / StretchRange), (int)(numericUpDown4.Value));
+                }
+                MyNewBmp.UnlockBits(MyBmpData);
+
         }
         private void DrawBrush(int OpointX, int OpointY, int pointX, int pointY)
         {
