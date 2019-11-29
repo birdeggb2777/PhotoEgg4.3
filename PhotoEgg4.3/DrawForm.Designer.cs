@@ -45,27 +45,27 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.SelectFullColor_Picture = new System.Windows.Forms.PictureBox();
             this.SelectRectColorPicture = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             this.tabControl2.SuspendLayout();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SelectFullColor_Picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SelectRectColorPicture)).BeginInit();
-            this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -104,7 +104,7 @@
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 30);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(624, 868);
+            this.splitter1.Size = new System.Drawing.Size(624, 1026);
             this.splitter1.TabIndex = 1;
             this.splitter1.TabStop = false;
             // 
@@ -120,7 +120,7 @@
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(596, 332);
+            this.tabControl1.Size = new System.Drawing.Size(596, 432);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -129,7 +129,7 @@
             this.tabPage1.Location = new System.Drawing.Point(55, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(537, 324);
+            this.tabPage1.Size = new System.Drawing.Size(537, 424);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
@@ -232,6 +232,35 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "筆刷大小";
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.numericUpDown4);
+            this.tabPage4.Controls.Add(this.label4);
+            this.tabPage4.ImageIndex = 7;
+            this.tabPage4.Location = new System.Drawing.Point(55, 4);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(537, 324);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown4
+            // 
+            this.numericUpDown4.Font = new System.Drawing.Font("新細明體", 17.856F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.numericUpDown4.Location = new System.Drawing.Point(181, 26);
+            this.numericUpDown4.Name = "numericUpDown4";
+            this.numericUpDown4.Size = new System.Drawing.Size(120, 45);
+            this.numericUpDown4.TabIndex = 1;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("新細明體", 17.28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label4.Location = new System.Drawing.Point(29, 29);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(138, 31);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "顏色誤差";
+            // 
             // imageList2
             // 
             this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
@@ -250,7 +279,7 @@
             this.tabControl2.Alignment = System.Windows.Forms.TabAlignment.Left;
             this.tabControl2.Controls.Add(this.tabPage6);
             this.tabControl2.ImageList = this.imageList2;
-            this.tabControl2.Location = new System.Drawing.Point(12, 463);
+            this.tabControl2.Location = new System.Drawing.Point(12, 519);
             this.tabControl2.Multiline = true;
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
@@ -298,41 +327,12 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.numericUpDown4);
-            this.tabPage4.Controls.Add(this.label4);
-            this.tabPage4.ImageIndex = 7;
-            this.tabPage4.Location = new System.Drawing.Point(55, 4);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(537, 324);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("新細明體", 17.28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label4.Location = new System.Drawing.Point(29, 29);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(133, 30);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "顏色誤差";
-            // 
-            // numericUpDown4
-            // 
-            this.numericUpDown4.Font = new System.Drawing.Font("新細明體", 17.856F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.numericUpDown4.Location = new System.Drawing.Point(181, 26);
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(120, 45);
-            this.numericUpDown4.TabIndex = 1;
-            // 
             // DrawForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(1256, 898);
+            this.ClientSize = new System.Drawing.Size(1256, 1056);
             this.Controls.Add(this.tabControl2);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.splitter1);
@@ -352,13 +352,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             this.tabControl2.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SelectFullColor_Picture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SelectRectColorPicture)).EndInit();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -637,3 +637,211 @@ namespace PenDrawing {
 		}
 	};
 }
+
+/*void BackToReroTest(unsigned char** fp, vector<int> w, vector<int> h, int width, int height, int b, int g, int r, int range) {
+			if (w.size() < 1)return;
+			//if (w.size() > 5000)return;
+			vector<int> w2;
+			vector<int> h2;
+			w2.assign(w.begin(), w.end());
+			h2.assign(h.begin(), h.end());
+			int count = 0;
+			register int i = 0;
+			try {
+				do {
+					//w2.resize(count + 1);
+					//h2.resize(count + 1);
+					//w.assign(w2.begin(), w2.end());
+					//h.assign(h2.begin(), h2.end());
+
+count = 0;
+for (i = 0;i < w.size();i++)
+{
+	if (w[i] < 0 || w[i] >= width || h[i] < 0 || h[i] >= height)
+	{
+		continue;
+	}
+	else {
+		if (checkColorRange(fp[h[i]][w[i] * 4], b, range) && checkColorRange(fp[h[i]][w[i] * 4 + 1], g, range) && checkColorRange(fp[h[i]][w[i] * 4 + 2], r, range))
+		{
+			fp[h[i]][w[i] * 4] = Color_B;
+			fp[h[i]][w[i] * 4 + 1] = Color_G;
+			fp[h[i]][w[i] * 4 + 2] = Color_R;
+			fp[h[i]][w[i] * 4 + 3] = 255;
+		}
+		if (h[i] - 1 > 0)
+		{
+			if (checkColorRange(fp[h[i] - 1][w[i] * 4], b, range) && checkColorRange(fp[h[i] - 1][w[i] * 4 + 1], g, range) && checkColorRange(fp[h[i] - 1][w[i] * 4 + 2], r, range)
+				&& fp[h[i] - 1][w[i] * 4 + 3] != 0 && FindByVector(w2, h2, w[i], h[i] - 1) == false)
+			{
+				if (count < w2.size())
+				{
+					h2[count] = h[i] - 1;
+					w2[count] = w[i];
+					count++;
+				}
+				else
+				{
+					h2.push_back(h[i] - 1);
+					w2.push_back(w[i]);
+					count++;
+				}
+			}
+		}
+		if (w[i] + 1 < width)
+		{
+			if (checkColorRange(fp[h[i]][(w[i] + 1) * 4], b, range) && checkColorRange(fp[h[i]][(w[i] + 1) * 4 + 1], g, range) && checkColorRange(fp[h[i]][(w[i] + 1) * 4 + 2], r, range)
+				&& fp[h[i]][(w[i] + 1) * 4 + 3] != 0 && FindByVector(w2, h2, w[i] + 1, h[i]) == false)
+			{
+				if (count < w2.size())
+				{
+					h2[count] = h[i];
+					w2[count] = w[i] + 1;
+					count++;
+				}
+				else
+				{
+					h2.push_back(h[i]);w2.push_back(w[i] + 1);count++;
+				}
+			}
+		}
+		if (w[i] - 1 > 0)
+		{
+			if (checkColorRange(fp[h[i]][(w[i] - 1) * 4], b, range) && checkColorRange(fp[h[i]][(w[i] - 1) * 4 + 1], g, range) && checkColorRange(fp[h[i]][(w[i] - 1) * 4 + 2], r, range)
+				&& fp[h[i]][(w[i] - 1) * 4 + 3] != 0 && FindByVector(w2, h2, w[i] - 1, h[i]) == false)
+			{
+				if (count < w2.size())
+				{
+					h2[count] = h[i];
+					w2[count] = w[i] - 1;
+					count++;
+				}
+				else
+				{
+					h2.push_back(h[i]);w2.push_back(w[i] - 1);count++;
+				}
+			}
+		}
+		if (h[i] + 1 < height)
+		{
+			if (checkColorRange(fp[h[i] + 1][w[i] * 4], b, range) && checkColorRange(fp[h[i] + 1][w[i] * 4 + 1], g, range) && checkColorRange(fp[h[i] + 1][w[i] * 4 + 2], r, range)
+				&& fp[h[i] + 1][w[i] * 4 + 3] != 0 && FindByVector(w2, h2, w[i], h[i] + 1) == false)
+			{
+				if (count < w2.size())
+				{
+					h2[count] = h[i] + 1;
+					w2[count] = w[i];
+					count++;
+				}
+				else
+				{
+					h2.push_back(h[i] + 1);w2.push_back(w[i]);count++;
+				}
+			}
+		}
+	}
+}
+if (count == 0) break;
+//vector<int>().swap(w);
+//vector<int>().swap(h);
+
+//w.resize(count + 1);
+//h.resize(count + 1);
+//w.assign(w2.begin(), w2.end());
+//h.assign(h2.begin(), h2.end());
+
+count = 0;
+for (i = 0;i < w.size();i++)
+{
+	if (w2[i] < 0 || w2[i] >= width || h2[i] < 0 || h2[i] >= height)
+	{
+		continue;
+	}
+	else {
+		if (checkColorRange(fp[h2[i]][w2[i] * 4], b, range) && checkColorRange(fp[h2[i]][w2[i] * 4 + 1], g, range) && checkColorRange(fp[h2[i]][w2[i] * 4 + 2], r, range))
+		{
+			fp[h2[i]][w2[i] * 4] = Color_B;
+			fp[h2[i]][w2[i] * 4 + 1] = Color_G;
+			fp[h2[i]][w2[i] * 4 + 2] = Color_R;
+			fp[h2[i]][w2[i] * 4 + 3] = 255;
+		}
+		if (h2[i] - 1 > 0)
+		{
+			if (checkColorRange(fp[h2[i] - 1][w2[i] * 4], b, range) && checkColorRange(fp[h2[i] - 1][w2[i] * 4 + 1], g, range) && checkColorRange(fp[h2[i] - 1][w2[i] * 4 + 2], r, range)
+				&& fp[h2[i] - 1][w2[i] * 4 + 3] != 0 && FindByVector(w2, h2, w2[i], h2[i] - 1) == false)
+			{
+				if (count < w.size())
+				{
+					h[count] = h2[i] - 1;
+					w[count] = w2[i];
+					count++;
+				}
+				else
+				{
+					h.push_back(h2[i] - 1);
+					w.push_back(w2[i]);
+					count++;
+				}
+			}
+		}
+		if (w2[i] + 1 < width)
+		{
+			if (checkColorRange(fp[h2[i]][(w2[i] + 1) * 4], b, range) && checkColorRange(fp[h2[i]][(w2[i] + 1) * 4 + 1], g, range) && checkColorRange(fp[h2[i]][(w2[i] + 1) * 4 + 2], r, range)
+				&& fp[h2[i]][(w2[i] + 1) * 4 + 3] != 0 && FindByVector(w2, h2, w2[i] + 1, h2[i]) == false)
+			{
+				if (count < w.size())
+				{
+					h[count] = h2[i];
+					w[count] = w2[i] + 1;
+					count++;
+				}
+				else
+				{
+					h.push_back(h2[i]);w.push_back(w2[i] + 1);count++;
+				}
+			}
+		}
+		if (w2[i] - 1 > 0)
+		{
+			if (checkColorRange(fp[h2[i]][(w2[i] - 1) * 4], b, range) && checkColorRange(fp[h2[i]][(w2[i] - 1) * 4 + 1], g, range) && checkColorRange(fp[h2[i]][(w2[i] - 1) * 4 + 2], r, range)
+				&& fp[h2[i]][(w2[i] - 1) * 4 + 3] != 0 && FindByVector(w2, h2, w2[i] - 1, h2[i]) == false)
+			{
+				if (count < w.size())
+				{
+					h[count] = h2[i];
+					w[count] = w2[i] - 1;
+					count++;
+				}
+				else
+				{
+					h.push_back(h2[i]);w.push_back(w2[i] - 1);count++;
+				}
+			}
+		}
+		if (h2[i] + 1 < height)
+		{
+			if (checkColorRange(fp[h2[i] + 1][w2[i] * 4], b, range) && checkColorRange(fp[h2[i] + 1][w2[i] * 4 + 1], g, range) && checkColorRange(fp[h2[i] + 1][w2[i] * 4 + 2], r, range)
+				&& fp[h2[i] + 1][w2[i] * 4 + 3] != 0 && FindByVector(w2, h2, w2[i], h2[i] + 1) == false)
+			{
+				if (count < w.size())
+				{
+					h[count] = h2[i] + 1;
+					w[count] = w2[i];
+					count++;
+				}
+				else
+				{
+					h.push_back(h2[i] + 1);w.push_back(w2[i]);count++;
+				}
+			}
+		}
+	}
+}
+//vector<int>().swap(w);
+//vector<int>().swap(h);
+				} while (count != 0);
+			}
+			catch (int ijk)
+			{
+			}
+		}*/
